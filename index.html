@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Mi Página Neomórfica</title>
+<style>
+  :root {
+    --bg-color: #e0e0e0;
+    --shadow-light: #ffffff;
+    --shadow-dark: #bebebe;
+    --accent: #5e60ce;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg-color);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--bg-color);
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    flex-grow: 1;
+  }
+
+  .card {
+    background: var(--bg-color);
+    border-radius: 20px;
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+    width: 100%;
+    padding: 24px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .card:active {
+    transform: scale(0.98);
+    box-shadow:
+      inset 6px 6px 12px var(--shadow-dark),
+      inset -6px -6px 12px var(--shadow-light);
+  }
+
+  .card img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .card h3 {
+    margin: 8px 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .btn {
+    background: var(--bg-color);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-top: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    box-shadow:
+      5px 5px 10px var(--shadow-dark),
+      -5px -5px 10px var(--shadow-light);
+    transition: all 0.2s ease;
+  }
+
+  .btn:active {
+    box-shadow:
+      inset 5px 5px 10px var(--shadow-dark),
+      inset -5px -5px 10px var(--shadow-light);
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    padding: 20px 0;
+    width: 100%;
+  }
+
+  /* ==================== RESPONSIVIDAD ==================== */
+  @media (min-width: 700px) {
+    main {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .card {
+      width: 280px;
+    }
+
+    .btn {
+      width: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header>Akcell</header>
+
+  <main>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="icono">
+      <h3>Diseño Moderno</h3>
+      <p>Suavidad, sombras realistas y un estilo minimalista adaptado a pantallas táctiles.</p>
+      <button class="btn">Leer más</button>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828673.png" alt="icono">
+      <h3>Interactividad</h3>
+      <p>Botones táctiles con efecto de presión y profundidad suave, sin retardos.</p>
+      <button class="btn">Probar</button>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="icono">
+      <h3>Optimización Móvil</h3>
+      <p>100 % compatible con todos los navegadores móviles modernos.</p>
+      <button class="btn">Ver más</button>
+    </div>
+  </main>
+
+  <footer>© 2026 - Akcell 💎</footer>
+
+</body>
+</html>
