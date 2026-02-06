@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Mi Página Neomórfica</title>
+<style>
+  :root {
+    --bg-color: #e0e0e0; /* Fondo gris */
+    --shadow-light: #ffffff;
+    --shadow-dark: #bebebe;
+    --accent: #5e60ce; /* Acento morado */
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg-color);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--bg-color);
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    flex-grow: 1;
+  }
+
+  .card {
+    background: var(--bg-color);
+    border-radius: 20px;
+    box-shadow:
+      8px 8px 16px var(--shadow-dark),
+      -8px -8px 16px var(--shadow-light);
+    width: 100%;
+    padding: 24px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .card:active {
+    transform: scale(0.98);
+    box-shadow:
+      inset 6px 6px 12px var(--shadow-dark),
+      inset -6px -6px 12px var(--shadow-light);
+  }
+
+  .card img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .card h3 {
+    margin: 8px 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .btn {
+    background: var(--bg-color);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-top: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    box-shadow:
+      5px 5px 10px var(--shadow-dark),
+      -5px -5px 10px var(--shadow-light);
+    transition: all 0.2s ease;
+  }
+
+  .btn:active {
+    box-shadow:
+      inset 5px 5px 10px var(--shadow-dark),
+      inset -5px -5px 10px var(--shadow-light);
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    padding: 20px 0;
+    width: 100%;
+  }
+
+  /* ==================== ESTILOS PARA NUEVAS SECCIONES ==================== */
+
+  /* Estilos para Galería de Imágenes */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    width: 100%;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+    transition: transform 0.2s ease;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Estilos para Links de Interés */
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .links-list li {
+    margin-bottom: 12px;
+  }
+
+  .links-list a {
+    display: block;
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 12px;
+    text-decoration: none;
+    color: var(--accent);
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+    transition: all 0.2s ease;
+  }
+
+  .links-list a:hover {
+    box-shadow:
+      inset 4px 4px 8px var(--shadow-dark),
+      inset -4px -4px 8px var(--shadow-light);
+  }
+
+  /* Estilos para Notas de Copiado */
+  .note {
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow:
+      inset 4px 4px 8px var(--shadow-dark),
+      inset -4px -4px 8px var(--shadow-light);
+    position: relative;
+  }
+
+  .note p {
+    margin: 0;
+    user-select: text;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--bg-color);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    box-shadow:
+      3px 3px 6px var(--shadow-dark),
+      -3px -3px 6px var(--shadow-light);
+    transition: all 0.2s ease;
+  }
+
+  .copy-btn:active {
+    box-shadow:
+      inset 3px 3px 6px var(--shadow-dark),
+      inset -3px -3px 6px var(--shadow-light);
+  }
+
+  /* Estilos para Video Multimedia */
+  .video-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+  }
+
+  .video-container iframe,
+  .video-container video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
+  /* ==================== RESPONSIVIDAD ==================== */
+  @media (min-width: 700px) {
+    main {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .card {
+      width: 280px;
+    }
+
+    .btn {
+      width: auto;
+    }
+
+    /* Ajustes responsivos para nuevas secciones */
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Inicio Sección Header -->
+  <header>Akcell</header>
+  <!-- Fin Sección Header -->
+
+  <!-- Inicio Sección Main -->
+  <main>
+
+    <!-- Inicio Sección Cards Originales -->
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="icono">
+      <h3>Diseño Moderno</h3>
+      <p>Suavidad, sombras realistas y un estilo minimalista adaptado a pantallas táctiles.</p>
+      <button class="btn">Leer más</button>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828673.png" alt="icono">
+      <h3>Interactividad</h3>
+      <p>Botones táctiles con efecto de presión y profundidad suave, sin retardos.</p>
+      <button class="btn">Probar</button>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="icono">
+      <h3>Optimización Móvil</h3>
+      <p>100 % compatible con todos los navegadores móviles modernos.</p>
+      <button class="btn">Ver más</button>
+    </div>
+    <!-- Fin Sección Cards Originales -->
+
+    <!-- Inicio Sección Galería de Imágenes -->
+    <section class="card">
+      <h3>Galería de Imágenes</h3>
+      <p>Explora nuestra colección de imágenes.</p>
+      <div class="gallery">
+        <!-- Agrega aquí tus imágenes reales o placeholders -->
+        <img src="https://via.placeholder.com/300x200?text=Imagen+1" alt="Imagen 1">
+        <img src="https://via.placeholder.com/300x200?text=Imagen+2" alt="Imagen 2">
+        <img src="https://via.placeholder.com/300x200?text=Imagen+3" alt="Imagen 3">
+        <img src="https://via.placeholder.com/300x200?text=Imagen+4" alt="Imagen 4">
+      </div>
+    </section>
+    <!-- Fin Sección Galería de Imágenes -->
+
+    <!-- Inicio Sección Links de Interés -->
+    <section class="card">
+      <h3>Links de Interés</h3>
+      <p>Enlaces útiles relacionados con el tema.</p>
+      <ul class="links-list">
+        <li><a href="https://example.com/link1" target="_blank">Link 1 - Descripción</a></li>
+        <li><a href="https://example.com/link2" target="_blank">Link 2 - Descripción</a></li>
+        <li><a href="https://example.com/link3" target="_blank">Link 3 - Descripción</a></li>
+      </ul>
+    </section>
+    <!-- Fin Sección Links de Interés -->
+
+    <!-- Inicio Sección Notas de Copiado -->
+    <section class="card">
+      <h3>Notas para Copiar</h3>
+      <p>Notas rápidas que puedes copiar fácilmente.</p>
+      <div class="note">
+        <p>Nota 1: Este es un texto de ejemplo para copiar.</p>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.textContent)">Copiar</button>
+      </div>
+      <div class="note">
+        <p>Nota 2: Otro texto de ejemplo para copiar.</p>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.textContent)">Copiar</button>
+      </div>
+      <div class="note">
+        <p>Nota 3: Más texto para copiar.</p>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.textContent)">Copiar</button>
+      </div>
+    </section>
+    <!-- Fin Sección Notas de Copiado -->
+
+    <!-- Inicio Sección Video Multimedia -->
+    <section class="card">
+      <h3>Video Multimedia</h3>
+      <p>Disfruta de este video embedido.</p>
+      <div class="video-container">
+        <!-- Ejemplo con iframe de YouTube; reemplaza con tu video -->
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video de ejemplo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- Alternativa: Usa <video> para un archivo local -->
+        <!-- <video controls>
+          <source src="tu-video.mp4" type="video/mp4">
+          Tu navegador no soporta el video.
+        </video> -->
+      </div>
+    </section>
+    <!-- Fin Sección Video Multimedia -->
+
+  </main>
+  <!-- Fin Sección Main -->
+
+  <!-- Inicio Sección Footer -->
+  <footer>© 2025 - Creado con estilo Neomórfico 💎</footer>
+  <!-- Fin Sección Footer -->
+
+  <!-- Script para funcionalidad de copiado -->
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Texto copiado al portapapeles!');
+      }).catch(err => {
+        console.error('Error al copiar: ', err);
+      });
+    }
+  </script>
+
+</body>
+</html>
