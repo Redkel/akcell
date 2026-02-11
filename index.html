@@ -115,6 +115,129 @@
       inset -5px -5px 10px var(--shadow-light);
   }
 
+  .hero {
+    padding: 32px 24px;
+  }
+
+  .hero h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    width: 100%;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+    transition: transform 0.2s ease;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .links-list li {
+    margin-bottom: 12px;
+  }
+
+  .links-list a {
+    display: block;
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 12px;
+    text-decoration: none;
+    color: var(--accent);
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+    transition: all 0.2s ease;
+  }
+
+  .links-list a:hover {
+    box-shadow:
+      inset 4px 4px 8px var(--shadow-dark),
+      inset -4px -4px 8px var(--shadow-light);
+  }
+
+  .note {
+    background: var(--bg-color);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow:
+      inset 4px 4px 8px var(--shadow-dark),
+      inset -4px -4px 8px var(--shadow-light);
+    position: relative;
+  }
+
+  .note p {
+    margin: 0;
+    user-select: text;
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--bg-color);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    box-shadow:
+      3px 3px 6px var(--shadow-dark),
+      -3px -3px 6px var(--shadow-light);
+    transition: all 0.2s ease;
+  }
+
+  .copy-btn:active {
+    box-shadow:
+      inset 3px 3px 6px var(--shadow-dark),
+      inset -3px -3px 6px var(--shadow-light);
+  }
+
+  .video-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      4px 4px 8px var(--shadow-dark),
+      -4px -4px 8px var(--shadow-light);
+  }
+
+  .video-container iframe,
+  .video-container video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
   footer {
     text-align: center;
     font-size: 0.85rem;
@@ -123,7 +246,6 @@
     width: 100%;
   }
 
-  /* ==================== RESPONSIVIDAD ==================== */
   @media (min-width: 700px) {
     main {
       flex-direction: row;
@@ -139,14 +261,29 @@
     .btn {
       width: auto;
     }
+
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
   }
 </style>
 </head>
 <body>
 
+  <!-- Inicio Sección Header -->
   <header>Akcell</header>
+  <!-- Fin Sección Header -->
 
+  <!-- Inicio Sección Main -->
   <main>
+
+    <!-- 1. Presentación / Bienvenida (opcional pero muy útil) -->
+    <section class="card hero">
+      <h2>Hola, soy Akcell</h2>
+      <p>Creo experiencias digitales con estilo neomórfico.<br>Aquí tienes lo más importante que suelo compartir:</p>
+    </section>
+
+    <!-- 2. Cards principales -->
     <div class="card">
       <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="icono">
       <h3>Diseño Moderno</h3>
@@ -167,9 +304,71 @@
       <p>100 % compatible con todos los navegadores móviles modernos.</p>
       <button class="btn">Ver más</button>
     </div>
-  </main>
 
+    <!-- 3. Notas para copiar (prioridad alta) -->
+    <section class="card">
+      <h3>Información clave para copiar</h3>
+      <div class="note">
+        <p>discord: akcell#1234</p>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.textContent)">Copiar</button>
+      </div>
+      <div class="note">
+        <p>https://akcell.redkel.com</p>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.textContent)">Copiar</button>
+      </div>
+      <div class="note">
+        <p>Estilo: Neomórfico · Color principal: #5e60ce</p>
+        <button class="copy-btn" onclick="copyToClipboard(this.previousElementSibling.textContent)">Copiar</button>
+      </div>
+      <!-- Agrega aquí tus notas reales -->
+    </section>
+
+    <!-- 4. Video Multimedia -->
+    <section class="card">
+      <h3>Video Multimedia</h3>
+      <p>Disfruta de este contenido.</p>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video de ejemplo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- 5. Galería (secundaria) -->
+    <section class="card">
+      <h3>Galería de Imágenes</h3>
+      <div class="gallery">
+        <img src="https://via.placeholder.com/300x200?text=Imagen+1" alt="Imagen 1">
+        <img src="https://via.placeholder.com/300x200?text=Imagen+2" alt="Imagen 2">
+        <img src="https://via.placeholder.com/300x200?text=Imagen+3" alt="Imagen 3">
+        <img src="https://via.placeholder.com/300x200?text=Imagen+4" alt="Imagen 4">
+      </div>
+    </section>
+
+    <!-- 6. Links de Interés -->
+    <section class="card">
+      <h3>Links de Interés</h3>
+      <ul class="links-list">
+        <li><a href="https://example.com/link1" target="_blank">Link 1 - Descripción</a></li>
+        <li><a href="https://example.com/link2" target="_blank">Link 2 - Descripción</a></li>
+        <li><a href="https://example.com/link3" target="_blank">Link 3 - Descripción</a></li>
+      </ul>
+    </section>
+
+  </main>
+  <!-- Fin Sección Main -->
+
+  <!-- Inicio Sección Footer -->
   <footer>© 2026 - Akcell 💎</footer>
+  <!-- Fin Sección Footer -->
+
+  <script>
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Texto copiado al portapapeles!');
+      }).catch(err => {
+        console.error('Error al copiar: ', err);
+      });
+    }
+  </script>
 
 </body>
 </html>
